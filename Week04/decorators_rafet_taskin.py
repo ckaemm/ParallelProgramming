@@ -1,9 +1,5 @@
-import time
-import tracemalloc
-import functools
-
 def performance(func):
-    @functools.wraps(func) # Preserve metadata of the original function
+    @functools.wraps(func)
     def wrapper(*args, **kwargs):
         tracemalloc.start()
         start_time = time.time()
@@ -15,13 +11,13 @@ def performance(func):
             tracemalloc.stop()
             end_time = time.time()
             
-            performance.counter += 1
-            performance.total_time += (end_time - start_time)
-            performance.total_mem += peak
+            wrapper.counter += 1
+            wrapper.total_time += (end_time - start_time)
+            wrapper.total_mem += peak
             
         return result
+        
+    wrapper.counter = 0
+    wrapper.total_time = 0
+    wrapper.total_mem = 0
     return wrapper
-
-performance.counter = 0
-performance.total_time = 0
-performance.total_mem = 0
