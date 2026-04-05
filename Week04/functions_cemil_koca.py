@@ -1,3 +1,4 @@
+import inspect
 custom_power = lambda x=0, /, e=1: x**e
 
 def custom_equation(x: int = 0, y: int = 0, /, a: int = 1, b: int = 1, *, c: int = 1) -> float:
@@ -17,8 +18,7 @@ def custom_equation(x: int = 0, y: int = 0, /, a: int = 1, b: int = 1, *, c: int
     :rtype: float
     """
     return (x**a + y**b) / c
-import inspect
-
+    
 def fn_w_counter() -> tuple[int, dict[str, int]]:
     """Count function calls with caller information."""
     fn_w_counter.total += 1
